@@ -1,0 +1,111 @@
+<app-admin-navbar></app-admin-navbar>
+
+  <mdb-carousel class="carousel slide carousel-fade" [type]="'carousel-thumbnails'" [animation]="'fade'">
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="https://media.gettyimages.com/photos/digital-human-brain-covered-with-networks-picture-id870184586?s=2048x2048" alt="First slide">
+      </mdb-carousel-item>
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="https://media.gettyimages.com/photos/top-view-of-computer-programmer-sitting-at-the-desk-picture-id673947226?s=2048x2048" alt="Second slide">
+      </mdb-carousel-item>
+      <mdb-carousel-item>
+        <img class="d-block w-100" src="https://media.gettyimages.com/photos/laboratory-picture-id629942998?s=2048x2048" alt="Third slide">
+      </mdb-carousel-item>
+    </mdb-carousel>
+
+
+<div style="background-color:rgba(192, 192, 192, 0.596); padding-top: 1px;">
+     <div class="text-center">
+       <h3 class="course-carousel-title text-center">Upcomming Courses</h3>
+     </div>
+    <hr >
+  <div class= "course-carousel">
+
+    <mdb-carousel [isControls]="false" class="carousel-multi-item multi-animation"
+    [animation]="'slide'" >
+    <mdb-carousel-item *ngFor="let item of slides; let i = index">
+      <div class="col-md-3" [ngClass]="{'d-none d-md-block': cardIndex !== 0}" *ngFor="let card of item; let cardIndex = index">
+        <mdb-card class="my-1" style="width: 300px; height: 300px;"  >
+          <img [src]="card.url" alt="Card image cap" style="height: 150px; border: none;" >
+          <mdb-card-body style="max-height: 91px;">
+            <mdb-card-title>
+              <h5 >{{card.name | shorten}}</h5>
+            </mdb-card-title>
+
+          </mdb-card-body>
+          <div style="max-height: 60px; background-color: grey; margin-top: 17px;">
+
+
+
+            <P style="margin-left: 20px; color:white">Author: {{card.author}}</P>
+
+          </div>
+        </mdb-card>
+
+
+
+
+
+         <!-- Card -->
+
+            <!-- Card -->
+
+
+
+
+
+
+
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>
+  </div>
+</div>
+<hr>
+<!-- -------------------top rate course----------------------------------------------- -->
+<div class="top-rate-course">
+    <div class="text-center">
+        <h3 class="course-carousel-title text-center">Top Rated Courses</h3>
+      </div>
+      <hr>
+  <div class="row" >
+    <div class="col-md-2" *ngFor="let course of topCourse ">
+      <!--Card-->
+      <mdb-card cascade="true" wider="true" style="height: 300px;margin-top: 50px;">
+
+        <!--Card image-->
+        <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+          <img [src]="course.url" style="width: 100%;height:150px;border:none">
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+        <!--/Card image-->
+        <mdb-card-body cascade="true">
+          <!--Card content-->
+          <!--Title-->
+          <h5 class="card-title">
+            {{course.name | topRateShorten}}
+          </h5>
+          <star-rating [value]="course.rate" checkedcolor="orange" uncheckedcolor="black" size="24px"    readonly="true" ></star-rating>
+
+
+
+
+        </mdb-card-body>
+        <hr>
+            <mdb-card-text >
+              <P style="margin-left: 20px;;">Author: {{course.author}}</P>
+            </mdb-card-text>
+        <!--/.Card content-->
+
+      </mdb-card>
+      <!--/.Card-->
+    </div>
+
+
+
+  </div>
+</div>
+<hr>
+<app-footer></app-footer>
+

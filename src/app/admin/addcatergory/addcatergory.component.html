@@ -1,0 +1,113 @@
+<div class="row fixed-top" style="margin-top: 57px;">
+  <ng-flash-message  style="margin: auto; width: 60%; text-align: center;"></ng-flash-message>
+</div>
+<div class="row">
+
+  <!-- ********************************* catergory ***************************************** -->
+
+  <div class="col-6">
+     <h3 class="text-center">Catergories</h3>
+
+    <ul class="list-group" type="none" *ngFor="let catergory of loadedCatergory;let i = index;">
+      <li class="list-group-item " aria-disabled="true"  class="grey lighten-2" style="padding: 20px 20px 0px 20px;" >
+        <span class="btn btn-outline-danger" (click)="deleteCatergory(catergory.name)" style="float: right">remove</span>
+        <span class="btn btn-outline-success"  style="float: right; margin-right: 10px;" (click)="whenClicked[i]=!whenClicked[i]">change</span>
+        {{catergory.name}}
+
+        <div class="input-group mb-3" *ngIf="whenClicked[i]" style="margin-top: 20px;">
+          <input type="text" class="form-control" placeholder="Catergory Name"  [(ngModel)]="changeCatergory" >
+          <div class="input-group-append" style="margin-right:5px;">
+            <button mdbBtn color="primary"  size="md" class="m-0 px-5 " type="button" id="button-addon2" mdbWavesEffect (click)="updateCatergory(catergory._id)"> Save</button>
+          </div>
+        </div>
+
+        <hr style="margin-top: 40px;">
+      </li>
+
+
+    </ul>
+
+
+    <div class='hr'>
+        <span class='hr-title'>Add A Catergory</span>
+    </div>
+
+
+    <div class="row" style="margin-top:20px;">
+      <div class="container">
+          <div class="input-group mb-3" >
+              <input type="text" class="form-control" placeholder="Catergory Name" aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="catergory">
+              <div class="input-group-append" style="margin-right:5px;">
+                <button mdbBtn color="primary" outline="true" size="md" class="m-0 px-5 " type="button" id="button-addon2" mdbWavesEffect (click)="addCatergory()"> Add</button>
+              </div>
+            </div>
+      </div>
+    </div>
+
+  </div>
+
+   <!-- ********************************* End catergory ***************************************** -->
+  <div class="col-6">
+    <h3 class="text-center">Sub-Catergories</h3>
+      <!-- ********************************* sub-catergory ***************************************** -->
+    <ul class="list-group" type="none" *ngFor="let catergory of loadedCatergory;let m = index" >
+      <li class="list-group-item disabled " aria-disabled="true" style="color:blue; padding: 20px 20px 0px 20px; text-align: center;font-size: 14pt" class="grey lighten-2" >{{catergory.name}}
+          <hr style="margin-top: 40px; background-color: black">
+      </li>
+      <ul class="list-group" type="none" *ngFor="let subcatergory of loadedSubcatergory | subcatergory:catergory.name ;let k = index" >
+        <li class="list-group-item " aria-disabled="true" class="grey lighten-2" style="padding: 20px 20px 0px 20px;">{{subcatergory.name}}
+          <span class="btn btn-outline-danger" (click)="deleteSubcatergory(subcatergory.name)" style="float: right">remove</span>
+          <span class="btn btn-outline-success"  style="float: right; margin-right: 10px;" (click)="whensub[m][k]=!whensub[m][k]" >change</span>
+
+          <!-- <div class="input-group " *ngIf="whensub[m][k]"  style="margin-top: 20px;">
+              <input type="text" class="form-control" placeholder="Catergory Name" aria-describedby="button-addon2" [(ngModel)]="changeCatergory" >
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="updateCatergory(catergory._id)">save</button>
+              </div>
+            </div> -->
+
+            <div class="input-group mb-3" *ngIf="whensub[m][k]" style="margin-top: 20px;">
+                <input type="text" class="form-control" placeholder="Catergory Name"  [(ngModel)]="changeCatergory" >
+                <div class="input-group-append" style="margin-right:5px;">
+                  <button mdbBtn color="primary"  size="md" class="m-0 px-5 " type="button"  mdbWavesEffect > Save</button>
+                </div>
+              </div>
+            <hr style="margin-top: 40px;">
+        </li>
+      </ul>
+
+    </ul>
+
+    <div class='hr'>
+        <span class='hr-title'>Add A Sub-Catergory</span>
+    </div>
+    <div class="row" style="margin-top:20px; margin-bottom: 50px;">
+      <div class="container">
+
+        <div class="input-group" style="margin-bottom:20px;" >
+
+                <select class="custom-select" id="inputGroupSelect04" [(ngModel)]="catergory" name="subCatergory">
+
+                  <option *ngFor="let catergory of loadedCatergory; let i=index;" [ngValue]="catergory.name"  >{{catergory.name}}</option>
+
+                </select>
+          </div>
+          <div class="input-group ">
+
+              <!-- <input type="text" class="form-control" placeholder="Sub-Catergory Name" [(ngModel)]="subCatergory"  >
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)=" addSubcatergory()" >Add</button>
+              </div> -->
+              <div class="input-group mb-3" >
+                  <input type="text" class="form-control" placeholder="Sub-Catergory Name"  [(ngModel)]="subCatergory">
+                  <div class="input-group-append" style="margin-right:5px;">
+                    <button mdbBtn color="primary" outline="true" size="md" class="m-0 px-5 " type="button" id="button-addon2" mdbWavesEffect (click)="addSubcatergory()"> Add</button>
+                  </div>
+                </div>
+            </div>
+      </div>
+    </div>
+     <!-- ********************************* sub-catergory ***************************************** -->
+
+  </div>
+</div>

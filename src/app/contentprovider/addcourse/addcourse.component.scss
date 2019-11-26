@@ -1,0 +1,17 @@
+mat-form-field{
+  width: 100%;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.progress-bar{
+  background-color:green !important;
+}

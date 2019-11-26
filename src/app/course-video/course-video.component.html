@@ -1,0 +1,131 @@
+<app-navbar></app-navbar>
+<h1  class= "text-center" style=" font-weight: bold;margin-top: 60px;">{{course.name}}</h1>
+<p >{{name}} : {{vidName}}</p>
+<div class="row">
+  <div class="col">
+      <div style="margin-left: 10px;">
+          <iframe  id="player" type="text/html" width="100%" height="400" [src]="url" frameborder="0" allowfullscreen ></iframe>
+
+        </div>
+        <div class="row">
+          <div class="col-sm" style="max-width: 140px;">
+            <p style="margin-top: 8px;margin-left: 10px;">Give A Rate</p>
+
+          </div>
+          <div class="col-sm">
+            <star-rating  [value]="course.rate" checkedcolor="orange" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>
+
+          </div>
+        </div>
+
+  </div>
+  <div class="col">
+      <div>
+
+          <ul *ngFor="let topic of course.topics" type="disc">
+
+            <li> {{topic.topic}}
+              <ul *ngFor="let videos of topic.videos">
+
+                <a (click)="setVideo(videos.video,topic.topic,videos.videoName)"><mdb-icon fas icon="play-circle"></mdb-icon>{{videos.videoName}}</a>
+              </ul>
+            </li>
+          </ul>
+        </div>
+  </div>
+</div>
+<hr>
+
+<nav style="margin-top: -17px;">
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Courese OverView</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Discussion</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="container">
+
+      <div class="row">
+        <div class="col">
+
+          <div class="row">
+            <h4>Author</h4><br>
+
+          </div>
+          <div class="row">
+           <p> {{course.author}}</p>
+
+          </div>
+        </div>
+
+
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col">
+
+          <div class="row">
+            <h4>Description</h4><br>
+
+          </div>
+          <div class="row">
+            <p>  {{course.description}}</p>
+
+          </div>
+        </div>
+
+
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col">
+
+          <div class="row">
+            <h4>Catergory</h4><br>
+
+          </div>
+          <div class="row">
+            <div class="col">
+
+              <p style="margin-left: -15px;"> Main Catergory :  {{course.catergory}}</p>
+              <p style="margin-left: -15px;"> Sub Catergory :  {{course.subCatergory}}</p>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col">
+
+          <div class="row">
+            <h4>Course Level</h4><br>
+
+          </div>
+          <div class="row">
+             {{course.skillLevel}}
+
+          </div>
+        </div>
+
+
+      </div>
+      <hr>
+
+    </div>
+
+
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+</div>
+
+<app-footer></app-footer>
+
+<!-- <ul *ngFor="let vid of videos;">
+ <a (click)="setVideo(vid)">{{vid}}</a>
+</ul> -->
+
+

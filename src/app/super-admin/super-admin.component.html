@@ -1,0 +1,31 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="row" >
+    <div class="col-2">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" >
+          <p class="text-center nav-text" >SUPER ADMIN</p>
+          <li><hr></li>
+        <a class="nav-link active" id="v-pills-recent-tab" data-toggle="pill" href="#v-pills-recent" role="tab" aria-controls="v-pills-recent" aria-selected="true" style="margin-top:100px;">Recent Added Course<span class="badge badge-light">{{size}}</span></a>
+        <a class="nav-link" id="v-pills-catergory-tab" data-toggle="pill" href="#v-pills-catergory" role="tab" aria-controls="v-pills-catergory" aria-selected="false">Add Catergory</a>
+        <a class="nav-link" id="v-pills-cp-tab" data-toggle="pill" href="#v-pills-cp" role="tab" aria-controls="v-pills-cp" aria-selected="false">Content Providers</a>
+        <a class="nav-link" id="v-pills-student-tab" data-toggle="pill" href="#v-pills-student" role="tab" aria-controls="v-pills-student" aria-selected="false">Student</a>
+        <a class="nav-link " id="v-pills-addAdmin-tab" data-toggle="pill" href="#v-pills-addAdmin" role="tab" aria-controls="v-pills-addAdmin" aria-selected="true" >Add Admin </a>
+        <a class="nav-link " id="v-pills-allAdmin-tab" data-toggle="pill" href="#v-pills-allAdmin" role="tab" aria-controls="v-pills-allAdmin" aria-selected="true" >All Admins </a>
+        <a class="nav-link " id="v-pills-setting-tab" data-toggle="pill" href="#v-pills-setting" role="tab" aria-controls="v-pills-setting" aria-selected="true" >Setting </a>
+      </div>
+    </div>
+    <div class="col-10">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-recent" role="tabpanel" aria-labelledby="v-pills-recent-tab">
+        <app-recent-added-course (passSize)=" receiveSize($event)"></app-recent-added-course>
+      </div>
+      <div class="tab-pane fade" id="v-pills-catergory" role="tabpanel" aria-labelledby="v-pills-catergory-tab"><app-addcatergory></app-addcatergory></div>
+      <div class="tab-pane fade" id="v-pills-cp" role="tabpanel" aria-labelledby="v-pills-cp-tab"><app-content-provider></app-content-provider></div>
+      <div class="tab-pane fade" id="v-pills-student" role="tabpanel" aria-labelledby="v-pills-student-tab"><app-all-student></app-all-student></div>
+      <div class="tab-pane fade" id="v-pills-addAdmin" role="tabpanel" aria-labelledby="v-pills-addAdmin-tab"><app-add-admin></app-add-admin></div>
+      <div class="tab-pane fade" id="v-pills-allAdmin" role="tabpanel" aria-labelledby="v-pills-allAdmin-tab"><app-all-admin></app-all-admin></div>
+      <div class="tab-pane fade" id="v-pills-setting" role="tabpanel" aria-labelledby="v-pills-setting-tab"><app-setting></app-setting></div>
+    </div>
+  </div>
+  </div>
+  <hr>
+  <app-footer></app-footer>

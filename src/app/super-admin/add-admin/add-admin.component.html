@@ -1,0 +1,84 @@
+
+<!-- Horizontal material form -->
+<div style="margin-top: 60px;width:80%; margin:auto;">
+    <h3 class="text-center">Register Form</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <!-- Grid row -->
+        <div class="form-group row">
+          <!-- Material input -->
+          <label for="fullName" class="col-sm-2 col-form-label">First Name</label>
+          <div class="col-sm-10">
+            <div class="md-form mt-0">
+              <input mdbInput type="text" class="form-control" formControlName="fname" >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <!-- Material input -->
+            <label for="Nic" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+              <div class="md-form mt-0">
+                <input mdbInput type="text" class="form-control" formControlName="lname" >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <!-- Material input -->
+            <label for="address" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <div class="md-form mt-0">
+                <input mdbInput type="email" class="form-control" formControlName="email" >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <!-- Material input -->
+            <label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-sm-10">
+              <div class="md-form mt-0">
+                <input mdbInput type="text" class="form-control" formControlName="contact" >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <!-- Material input -->
+              <label for="email" class="col-sm-2 col-form-label">Admin Type</label>
+              <div class="col-sm-10">
+                  <mat-form-field style="width: 100%;" >
+                      <mat-select formControlName="role" >
+                        <mat-option value="superAdmin">Super Admin</mat-option>
+                        <mat-option value="admin">Admin</mat-option>
+
+                      </mat-select>
+                    </mat-form-field>
+              </div>
+            </div>
+
+
+          <div class="form-group row">
+              <!-- Material input -->
+              <label for="email" class="col-sm-2 col-form-label">password</label>
+              <div class="col-sm-10">
+                <div class="md-form mt-0">
+                  <input mdbInput type="password" class="form-control" formControlName="password" >
+                </div>
+              </div>
+            </div>
+
+
+
+
+        <!-- Grid row -->
+        <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" mdbBtn color="primary">Register</button>
+            </div>
+          </div>
+
+      </form>
+      <!-- Horizontal material form -->
+</div>

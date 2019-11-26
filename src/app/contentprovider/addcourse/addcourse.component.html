@@ -1,0 +1,257 @@
+<div style="width: 100%; ">
+    <div class="row">
+        <div class="col-12">
+          <div *ngIf="user">
+            <img src="{{ user.photoUrl }}">
+            <div>
+              <h4>{{ user.name }}</h4>
+            </div>
+          </div>
+          <button (click)="signInWithGoogle()" type="button">Sign in</button>
+          <button (click)="signOut()" type="button">Logout</button>
+        </div>
+      </div>
+  <form style="margin-top: 100px;" [formGroup]="contentForm" (ngSubmit)="onSubmit()" >
+
+
+      <div class="row">
+        <div class="col-12">
+          <h6>Course Title</h6>
+          <mat-form-field >
+            <input matInput placeholder="title"  formControlName="name">
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-12">
+          <h6>Course Description</h6>
+          <mat-form-field >
+            <textarea matInput placeholder="description" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <h6>Catergory</h6>
+
+              <mat-form-field  style="margin-bottom:20px;">
+                <mat-select [(value)]="catergory" name="subCatergory" formControlName="catergory" placeholder="select catergory">
+                  <mat-option *ngFor="let catergory of loadedCatergory; let i=index;" [value]="catergory.name">{{catergory.name}}</mat-option>
+
+                </mat-select>
+              </mat-form-field>
+
+        </div>
+        <div class="form-group col-sm-6">
+            <h6>Sub-Catergory</h6>
+
+              <mat-form-field style="margin-bottom:20px;">
+                <mat-select formControlName="subCatergory" placeholder="select sub-catergory">
+                  <mat-option *ngFor="let subcatergory of loadedSubcatergory | subcatergory:catergory; let i=index;" [value]="subcatergory.name"  >{{subcatergory.name}}</mat-option>
+
+                </mat-select>
+              </mat-form-field>
+          </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <!-- type -->
+          <h6>Course Type</h6>
+
+          <mat-form-field>
+            <mat-select placeholder="Select" formControlName="type">
+              <mat-option value="paid">paid</mat-option>
+              <mat-option value="free">free</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-sm-4">
+          <!-- skill level -->
+          <h6>Skill Level</h6>
+          <mat-form-field>
+            <mat-select placeholder="Select" formControlName="skillLevel">
+              <mat-option value="beginner">beginner</mat-option>
+              <mat-option value="intermediate">intermediate</mat-option>
+              <mat-option value="advance">advance</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="form-group col-sm-4">
+          <!-- duration -->
+          <h6>Duration</h6>
+
+          <mat-form-field>
+            <mat-select placeholder="Select" formControlName="duration">
+              <mat-option value="lessmonth">lessmonth</mat-option>
+              <mat-option value="1-3month">1-3month</mat-option>
+              <mat-option value="3+month">3+month</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <!-- <h6>Course Image</h6>
+          <input type="file" (change)="onFileSelected($event)"> -->
+          <label for="file-upload" class="custom-file-upload" class="btn btn-outline-primary">
+            Select Image
+        </label>
+        <input id="file-upload" type="file" (change)="onFileSelected($event)"/>
+        <p>{{imgName | shorten}}</p>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 50px;">
+        <div class="col-12">
+          <h4 class="text-center">Course content</h4>
+        </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Topics</h6>
+        </div>
+      <div class="col-md-4">
+          <h6>Video</h6>
+        </div>
+      <div class="col-md-4">
+          <h6>Files</h6>
+        </div>
+      </div>
+
+        <div formArrayName="topics" >
+          <div class="form-group" *ngFor="let topic of contentForm['controls'].topics['controls']; let i = index">
+
+
+                  <div [formGroupName]="i">
+                    <div class="row" style="width: 100%; ">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+
+                       <input placeholder='Topic {{i+1}}' formControlName="topic" class="form-control">
+                        </div>
+                          <button mat-icon-button color="warn" (click)="onDelete(i)" ><mat-icon>delete</mat-icon></button>
+
+                        </div>
+                        <div class="col-md-4"  class="form-group" formArrayName="videos" style="width: 33%"  >
+
+                              <!-- <button  class="btn btn-outline-success" (click)="addVideos()" >Add Video</button> -->
+                              <div  *ngFor="let video of topic['controls'].videos['controls'];let m=index;" >
+
+                                <!-- <input placeholder='Sub Topic {{m+1}}'  class="form-control" [formControlName]="m" > -->
+
+                                <div  style="margin-bottom: 10px;">
+
+                                  <!-- <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="inputGroupFileAddon01" (click)="uploadVideo(i,m)" >Upload</span>
+                                    </div>
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01">
+                                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+
+
+                                    </div>
+                                     <button mat-icon-button type="button" color="warn" (click)="onDeleteVideo(i,m)"><mat-icon>delete</mat-icon></button>
+
+                                  </div> -->
+                                  <div [formGroupName]="m">
+                                    <div style="margin-bottom: 20px;">
+
+                                      <div class="form-group" style="margin-right:15px;">
+                                          <input placeholder='Video Name' formControlName="videoName" class="form-control" >
+                                        </div>
+                                           <!-- <input #f type="file" accept="video/*"> -->
+                                            <div class="row">
+                                              <div class="col-8">
+                                                <label for="video-upload{{i}}{{m}}" class="custom-file-upload" class="btn btn-outline-primary btn-sm ">
+                                                 Select Video
+                                             </label>
+                                             <input id="video-upload{{i}}{{m}}" #f type="file" accept="video/*" (change)="onVideoSelected($event,i,m)"/>
+                                             <p>{{vid[i][m]}}</p>
+
+                                              </div>
+                                              <div class="col-4">
+
+                                                <button type="button" class="btn btn-outline-primary btn-sm " (click)="uploadVideo(f.files,i,m)" style="float:right; margin-right: 15px;" [disabled]="uploaded[i][m]">Upload</button>
+                                              </div>
+                                            </div>
+
+
+                                           <!-- <button  (click)="onUploaded(i,m)">uploaded</button> -->
+                                           <div *ngIf="uploadedbar[i][m]" class="progress" style="width: 95%;">
+                                              <div class="progress-bar progress-bar-striped progress-bar-animated"  role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%" ></div>
+                                            </div>
+                                            <!-- <button type="button" (click)="onUploaded(i,m)">uploadede</button> -->
+                                           <button mat-icon-button type="button" color="warn" (click)="onDeleteVideo(i,m)"><mat-icon>delete</mat-icon></button>
+                                      </div>
+                                  </div>
+
+
+                                  </div>
+                              </div>
+
+                                <button mat-button  color="primary" type="button" (click)="addVideos(i)">   <mat-icon>add</mat-icon>Add Video</button>
+                      </div>
+
+                    <div class="col-md-4" class="form-group" formArrayName="files"  style="width: 33%" >
+                        <div  *ngFor="let file of topic['controls'].files['controls'];let j=index;" >
+                            <div  style="margin-bottom: 90px;">
+                              <div class="input-group">
+
+
+
+                                  <div class="row">
+                                      <div class="col-8">
+                                        <label for="pdf-upload{{i}}{{j}}" class="custom-file-upload" class="btn btn-outline-primary btn-sm ">
+                                         Select Video
+                                     </label>
+                                     <input id="pdf-upload{{i}}{{j}}" #k type="file" accept="video/*" (change)="onPdfSelected($event,i,j)"/>
+                                     <p>{{pdf[i][j]}}</p>
+
+                                      </div>
+                                      <div class="col-4">
+
+                                        <button type="button" class="btn btn-outline-primary btn-sm " (click)="uploadPdf(k.files,i,j)" style="float:right; margin-right: 15px;" >Upload</button>
+                                      </div>
+                                    </div>
+
+
+
+                                <button mat-icon-button type="button" (click)="onDeleteFile(i,j)" color="warn"><mat-icon>delete</mat-icon></button>
+                              </div>
+
+                            </div>
+
+                        </div>
+                        <button mat-button  color="primary" type="button" (click)="addFile(i)">   <mat-icon>add</mat-icon>Add File</button>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+
+
+          <div class="row">
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-primary" (click)="addTopic();" style="width: 150px; margin-left: 15px;" >Add Topic</button>
+                <button type="submit" class = "btn btn-outline-primary"  style="margin-left: 15px; width: 150px;">Save Content</button>
+
+              </div>
+          </div>
+      </form>
+<button (click)="onClick()"> CLICKME</button>
+</div>
+

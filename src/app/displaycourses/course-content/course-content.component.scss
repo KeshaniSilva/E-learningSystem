@@ -1,0 +1,56 @@
+.content{
+  height:400px;
+  //background-color: rgb(122, 117, 98);
+  padding-top: 10px;
+  background-image: linear-gradient(to right, rgb(110, 110, 110) , rgb(68, 59, 53));
+
+}
+
+.content .inner-content{
+  background-color: transparent;
+  height:380px;
+  width: 98%;
+  margin: auto;
+  border: solid white 3px;
+  color: white;
+}
+
+h1{
+  font-family: fantasy;
+  color:white;
+  font-size: 40pt;
+  letter-spacing: 5px;
+}
+img{
+
+  width:400px;
+  height:300px;
+  border: 5px solid white;
+}
+
+#sub-name{
+  float: right;
+  font-size: 40pt;
+  color:rgb(75, 155, 10);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  letter-spacing: 10px;
+  margin-right: 30px;
+  margin-top: 50px;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 3px;
+
+}
+
+.topic{
+  width: 80%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: auto;
+
+  border-radius: 10px;
+  background-color: rgb(110, 110, 110);
+  color:white
+}
+hr{
+  background-color: white;
+}

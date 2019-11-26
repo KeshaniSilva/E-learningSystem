@@ -1,0 +1,92 @@
+<h3 class="text-center" style="margin-top: 20px;" >My Profile</h3>
+<div class="row" style="margin-top: 20px; background-color: rgb(134, 134, 134);">
+  <div class="col-3" style="max-width:300px ;">
+      <img src="{{userDetail.imageURL}}" class="img-thumbnail">
+  </div>
+  <div class="co1" >
+    <div style="margin-top: 100px; color:white">
+
+      <p>Frist Name : {{userDetail.fname}}</p>
+      <p>Last Name: {{userDetail.lname}}</p>
+      <p>Email: {{userDetail.email}}</p>
+    </div>
+  </div>
+</div>
+    <!-- --------------------------change name------------------------------- -->
+<hr>
+   <h5 >Change Name</h5>
+
+     <div class="form-row" style=" margin-bottom: 30px;">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="First name" name="fname" [(ngModel)]="fname" >
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Last name" name="lname" [(ngModel)]="lname" >
+        </div>
+
+      </div>
+          <div class="form-row">
+              <button type="button" mdbBtn color="primary" mdbWavesEffect outline="true" (click)="updateName()">Save</button>
+          </div>
+      <!-- --------------------------change Image------------------------------- -->
+      <hr>
+     <h5>Add/Change Image</h5>
+     <div class="form-row" style=" margin-bottom: 30px;">
+         <div class="form-group">
+
+             <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="onFileSelected($event)"> -->
+             <div class="input-group">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupFileAddon01" type="button" (click)="uploadImage()" >Upload</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01" (change)="onFileSelected($event)">
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+
+              </div>
+            </div>
+
+       </div>
+        <!-- --------------------------change Password------------------------------- -->
+        <hr>
+       <h5>Change Password</h5>
+    <form [formGroup]="passwordrestForm" >
+       <div class="form-row" style=" margin-bottom: 30px;">
+           <div class="col">
+             <input type="password" class="form-control" placeholder="Current password"    style=" margin-bottom: 10px;" formControlName="password"  >
+             <input type="password" class="form-control" placeholder="New password" style=" margin-bottom: 10px;" formControlName="newPassword" >
+             <input type="password" class="form-control" placeholder="Confirm New password" style=" margin-bottom: 10px;" formControlName="confirmPassword">
+
+             <span *ngIf="!passwordMatch" > <p class="text-danger">new password not matching</p></span>
+
+           </div>
+
+       </div>
+       <div class="form-row">
+           <div class="form-group">
+
+               <button type="button" mdbBtn color="primary" mdbWavesEffect outline="true" (click)="changePassword()">Save</button>
+
+           </div>
+       </div>
+   </form>
+   <hr>
+   <h5>Delete Account</h5>
+   <form >
+      <div class="form-row" style=" margin-bottom: 30px;">
+          <div class="col">
+            <input type="password" class="form-control" placeholder="Current password"    style=" margin-bottom: 10px;" [(ngModel)]="delPassword" name="delPassword" >
+          </div>
+
+      </div>
+      <div class="form-row">
+          <div class="form-group">
+
+              <button type="button" mdbBtn color="danger" mdbWavesEffect outline="true" (click)="onDelete()">Delete</button>
+
+          </div>
+      </div>
+  </form>

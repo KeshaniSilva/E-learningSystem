@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="row" style="margin-top: 60px;">
+
+
+
+  <div class="col-11" style="margin: auto; position: relative;">
+    <div class="content">
+      <div class="inner-content">
+        <h1 class=" text-center" >   {{course.name}}</h1>
+        <hr style="background-color: white">
+        <!-- <p id="sub-name" class="animated bounce infinite">{{course.subCatergory | uppercase}}</p> -->
+        <p></p>
+        <p>{{course.description | contentShorten}}</p>
+        <p>{{course.author}}</p>
+      </div>
+    </div>
+    <div style="position: absolute; bottom: -120px;  right: 70px;"  >
+
+      <img src="{{course.url}}" class=" z-depth-5" alt="1"   ><br>
+      <button *ngIf="userLoggedIn"  mdbBtn type="button" gradient="blue" rounded="true"  block="true" mdbWavesEffect style="margin-top: 5px;" (click)="onRegisterCourse()">Enroll</button>
+    </div>
+
+  </div>
+</div>
+<hr>
+<h1 class="text-center" style="color: black">Topics</h1>
+<div class=" topic">
+
+  <ul type="none"   *ngFor="let course of course.topics">
+    <li>{{course.topic}}</li>
+    <hr>
+
+  </ul>
+
+</div>
+<hr>
+<app-footer></app-footer>

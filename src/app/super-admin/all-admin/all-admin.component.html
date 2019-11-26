@@ -1,0 +1,73 @@
+<div class="admin">
+  <h3 class="text-center"> Admins</h3>
+    <div class="row" >
+        <div class="col-md-3" *ngFor="let ad of allAdmins" >
+         <!-- Card -->
+          <mdb-card >
+              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                <!-- Card img -->
+                <img src="{{ad.imageURL}}" alt="Card image cap" >
+                <!-- <a [routerLink]="['/',course._id,'coursevideo']">
+                  <div class="mask"></div>
+                </a> -->
+
+              </div>
+              <!--Card content-->
+              <mdb-card-body>
+                <!--Title-->
+                <mdb-card-title>
+                  <!-- <h4>{{c.name}}</h4> -->
+                </mdb-card-title>
+                <P>Name:{{ad.fname}} {{ad.lname}}</P>
+                <!--Text-->
+                <mdb-card-text>
+                 Email:{{ad.email}}
+                </mdb-card-text>
+                <div class="row">
+                  <div class="col">
+                    <button mdbBtn type="button"  color="danger" outline="true" size="sm" mdbWavesEffect (click)="onDelete(ad._id)">Delete</button>
+                  </div>
+                </div>
+              </mdb-card-body>
+            </mdb-card>
+            <!-- Card -->
+        </div>
+      </div>
+
+</div>
+<div class="superAdmin">
+  <h3 class="text-center"> Super Admins</h3>
+    <div class="row" >
+        <div class="col-md-3" *ngFor="let sad of allSuperAdmins" >
+         <!-- Card -->
+          <mdb-card >
+              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                <!-- Card img -->
+                <img src="{{sad.imageURL}}" alt="Card image cap" >
+                <!-- <a [routerLink]="['/',course._id,'coursevideo']">
+                  <div class="mask"></div>
+                </a> -->
+
+              </div>
+              <!--Card content-->
+              <mdb-card-body>
+                <!--Title-->
+                <mdb-card-title>
+                  <!-- <h4>{{c.name}}</h4> -->
+                </mdb-card-title>
+                <P>Name:{{sad.fname}} {{sad.lname}}</P>
+                <!--Text-->
+                <mdb-card-text>
+                 Email:{{sad.email}}
+                </mdb-card-text>
+                <div class="row">
+                  <div class="col">
+                  </div>
+                </div>
+              </mdb-card-body>
+            </mdb-card>
+            <!-- Card -->
+        </div>
+      </div>
+
+</div>

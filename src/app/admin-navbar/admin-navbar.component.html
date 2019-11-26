@@ -1,0 +1,213 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white fixed-top" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/adminhome']" routerLinkActive="router-link-active" >Navbar</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/adminhome']">Home<span class="sr-only">(current)</span></a>
+        </li>
+
+        <!-- Dropdown -->
+        <!-- <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+           Catergories<span class="caret"></span></a>
+           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu"  >
+            <div *ngFor="let course of loadedCourses">
+              <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/displaycourses', course.name]" (click)="onSelect(course.name)">{{course.name}}</a>
+
+            </div>
+
+          </div>
+        </li> -->
+
+      </ul>
+      <!-- Links -->
+
+      <!-- Search form -->
+      <!-- <form class="form-inline waves-light" mdbWavesEffect>
+        <div class="md-form my-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        </div>
+      </form> -->
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+          <button *ngIf="!userLoggedIn" mdbBtn type="button" color="success" outline="true" class="waves-light" data-toggle="modal" data-target="#signinModalForm" (click)="login.show()" mdbWavesEffect> Sign In</button>
+
+      </div>
+
+        <div class="btn-group" *ngIf="userLoggedIn">
+
+            <button *ngIf="userLoggedIn" mdbBtn type="button" color="danger" outline="true" class="waves-light"  (click)="onLogout()" mdbWavesEffect> Log Out</button>
+          </div>
+
+
+
+    </links>
+    <!-- Collapsible content -->
+
+  </mdb-navbar>
+  <!--/.Navbar-->
+
+
+
+  <!-- -------------------------------------------------login modal ------------------------------------------->
+
+
+  <div mdbModal #login="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <!--Content-->
+      <div class="modal-content form-elegant">
+        <!--Header-->
+        <div class="modal-header text-center">
+          <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+            <strong>Sign in</strong>
+          </h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="login.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!--Body-->
+        <div class="modal-body mx-4">
+          <!--Body-->
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+            <div class="md-form mb-5">
+              <input type="email" id="Form-email1" class="form-control" mdbInput mdbValidate
+                     formControlName="email">
+              <label for="Form-email1">Email</label>
+              <mdb-error
+                *ngIf="emailValidate.invalid && (emailValidate.dirty || emailValidate.touched)">
+                Input invalid
+              </mdb-error>
+              <mdb-success
+                *ngIf="emailValidate.valid && (emailValidate.dirty || emailValidate.touched)">Input
+                valid
+              </mdb-success>
+            </div>
+
+            <div class="md-form pb-3" style="margin-top:-20px;">
+              <input type="password" id="Form-pass1" class="form-control" mdbInput mdbValidate
+                     formControlName="password">
+              <label for="Form-pass1">Password</label>
+              <mdb-error
+                *ngIf="passwordValidate.invalid && (passwordValidate.dirty || passwordValidate.touched)">
+                Input invalid
+              </mdb-error>
+              <mdb-success
+                *ngIf="passwordValidate.valid && (passwordValidate.dirty || passwordValidate.touched)">
+                Input valid
+              </mdb-success>
+
+            </div>
+
+            <div class="md-form pb-3" style="margin-top: -20px;">
+
+                <!-- Default unchecked -->
+                <div class="row">
+                  <div class="col-3"><p style="color: rgb(133, 133, 133);">Role</p></div>
+                  <div class="col-4">
+
+                    <div class="custom-control custom-radio" style="margin-top: 8px;">
+                      <input type="radio" class="custom-control-input" id="defaultChecked" name="role" value="admin" formControlName="role"  checked mdbInput>
+                      <label class="custom-control-label" for="defaultChecked" style="font-size: 14pt; font-weight: bold;">Admin</label>
+                    </div>
+                  </div>
+
+                <div class="col-5" >
+
+                  <!-- Default checked -->
+                  <div class="custom-control custom-radio"  style="margin-top: 8px; ">
+                    <input type="radio" class="custom-control-input" id="defaultUnchecked" name="role" value="superAdmin" formControlName="role" mdbInput>
+                    <label class="custom-control-label" for="defaultUnchecked" style="font-size: 14pt; font-weight: bold;">Super Admin</label>
+                  </div>
+
+                </div>
+                </div>
+
+        </div>
+
+            <div class="text-center mb-3">
+              <button type="submit" mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light"
+                      mdbWavesEffect>Sign in
+              </button>
+            </div>
+          </form>
+
+        </div>
+        <!--Footer-->
+        <div class="modal-footer mx-5 pt-3 mb-1">
+            <p class="font-small blue-text d-flex justify-content-end">Forgot
+                <a  (click)="forgetPassword.show(); login.hide()" class="blue-text ml-1"> Password?</a>
+              </p>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------- End login modal ------------------------------------------->
+
+
+
+
+  <!-- --------------------------------------------Forget password----------------------------------------------- -->
+
+
+  <div mdbModal #forgetPassword="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <!--Content-->
+      <div class="modal-content form-elegant">
+        <!--Header-->
+        <div class="modal-header text-center">
+          <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+            <strong>Sign in</strong>
+          </h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="forgetPassword.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!--Body-->
+        <div class="modal-body mx-4">
+          <!--Body-->
+          <form [formGroup]="forgetPasswordForm" (ngSubmit)="onForgetPassword()">
+
+            <div class="md-form mb-5">
+              <input type="email" id="Form-email1" class="form-control" mdbInput mdbValidate formControlName="email"  >
+              <label for="Form-email1">Email</label>
+
+            </div>
+
+
+
+
+            <div class="text-center mb-3">
+              <button type="submit" mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light"
+                      mdbWavesEffect>Send
+              </button>
+            </div>
+          </form>
+
+        </div>
+        <!--Footer-->
+
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+
+  <!-- --------------------------------------------Forget password----------------------------------------------- -->
+
+
+
+
+  <!-- --------------------------------------------Footer----------------------------------------------------------------- -->
+
+

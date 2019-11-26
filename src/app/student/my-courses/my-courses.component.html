@@ -1,0 +1,31 @@
+<div class="row" style="margin-top:60px;">
+
+  <div class="col-md-3" *ngFor="let course of courses.User.registerCourse" >
+    <!-- Card -->
+     <mdb-card >
+         <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+           <!-- Card img -->
+           <img src="{{course.url}}" alt="Card image cap" >
+           <a [routerLink]="['/',course._id,'coursevideo']">
+             <div class="mask"></div>
+           </a>
+
+         </div>
+         <!--Card content-->
+         <mdb-card-body>
+           <!--Title-->
+           <mdb-card-title>
+             <h6>{{course.name | shorten}}</h6>
+           </mdb-card-title>
+
+           <!--Text-->
+           <mdb-card-text>
+            By:{{course.author}}
+           </mdb-card-text>
+           <star-rating [value]="course.rating" checkedcolor="orange" uncheckedcolor="black" size="24px"readonly="true" ></star-rating>
+
+         </mdb-card-body>
+       </mdb-card>
+       <!-- Card -->
+   </div>
+</div>

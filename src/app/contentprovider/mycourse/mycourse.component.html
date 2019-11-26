@@ -1,0 +1,144 @@
+<div class="pending">
+ <h3 class="text-center">Permission Pending Courses</h3>
+  <div class="row" >
+    <div class="col-md-3" *ngFor="let course of pending" >
+     <!-- Card -->
+     <mdb-card >
+      <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+        <!-- Card img -->
+        <img src="{{course.url}}" alt="Card image cap"  style="height: 160px;" >
+        <a [routerLink]="['/displaycourses','course-content',course._id]">
+          <div class="mask"></div>
+        </a>
+
+      </div>
+      <!--Card content-->
+      <mdb-card-body style=" height: 30px;" >
+        <!--Title-->
+        <mdb-card-title >
+          <h6>{{course.name | shorten}}</h6>
+        </mdb-card-title>
+
+        <!--Text-->
+
+      </mdb-card-body>
+
+      <div style="max-height: 50px; margin-bottom: 10px;margin: auto; ">
+
+
+       <div class="row">
+          <div class="col-6">
+
+              <button  mdbBtn type="button" color="primary" outline="true" size="sm" mdbWavesEffect style="margin-bottom: 10px;" mdbWavesEffect [routerLink]="['/contentProvider','update',course._id]" routerLinkActive="router-link-active" >Update</button>
+            </div>
+            <div class="col-6" *ngIf="admin">
+
+              <button mdbBtn type="button" color="danger" outline="true" size="sm" mdbWavesEffect style="margin-bottom: 10px;" (click)="onDelete(course._id)" >Remove</button>
+            </div>
+       </div>
+
+        </div>
+    </mdb-card>
+        <!-- Card -->
+    </div>
+  </div>
+
+
+</div>
+<div class="accept">
+  <h3 class="text-center">Accept Courses</h3>
+  <div class="row" >
+    <div class="col-md-3" *ngFor="let course of accepted" >
+     <!-- Card -->
+     <mdb-card >
+      <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+        <!-- Card img -->
+        <img src="{{course.url}}" alt="Card image cap"  style="height: 160px;" >
+        <a [routerLink]="['/displaycourses','course-content',course._id]">
+          <div class="mask"></div>
+        </a>
+
+      </div>
+      <!--Card content-->
+      <mdb-card-body style=" height: 30px;" >
+        <!--Title-->
+        <mdb-card-title >
+          <h6>{{course.name | shorten}}</h6>
+        </mdb-card-title>
+
+        <!--Text-->
+
+      </mdb-card-body>
+
+      <div style="max-height: 50px; margin-bottom: 10px;margin: auto; ">
+
+
+       <div class="row">
+          <div class="col-6">
+
+              <button mdbBtn type="button" color="primary" outline="true" size="sm" mdbWavesEffect style="margin-bottom: 10px;" mdbWavesEffect [routerLink]="['/contentProvider','update',course._id]" routerLinkActive="router-link-active" >Update</button>
+            </div>
+            <div class="col-6"  *ngIf="admin">
+
+              <button mdbBtn type="button" color="danger" outline="true" size="sm" mdbWavesEffect style="margin-bottom: 10px;" (click)="onDelete(course._id)" >Remove</button>
+            </div>
+       </div>
+
+        </div>
+    </mdb-card>
+        <!-- Card -->
+    </div>
+  </div>
+
+
+</div>
+<div class="reject">
+  <h3 class="text-center">Reject Courses</h3>
+  <div class="row" >
+    <div class="col-md-3" *ngFor="let course of rejected" >
+     <!-- Card -->
+     <mdb-card >
+      <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+        <!-- Card img -->
+        <img src="{{course.url}}" alt="Card image cap"  style="height: 160px;" >
+        <a [routerLink]="['/displaycourses','course-content',course._id]">
+          <div class="mask"></div>
+        </a>
+
+      </div>
+      <!--Card content-->
+      <mdb-card-body style=" height: 30px;" >
+        <!--Title-->
+        <mdb-card-title >
+          <h6>{{course.name | shorten}}</h6>
+        </mdb-card-title>
+
+        <!--Text-->
+
+      </mdb-card-body>
+
+      <div style="max-height: 50px; margin-bottom: 10px;margin: auto; ">
+
+
+       <div class="row">
+          <div class="col-6">
+
+              <button   mdbBtn type="button" color="primary" outline="true" size="sm" mdbWavesEffect style="margin-bottom: 10px;" mdbWavesEffect [routerLink]="['/contentProvider','update',course._id]" routerLinkActive="router-link-active" >Update</button>
+            </div>
+            <div class="col-6"  *ngIf="admin">
+
+              <button mdbBtn type="button" color="danger" outline="true" size="sm" mdbWavesEffect style="margin-bottom: 10px;" (click)="onDelete(course._id)" >Remove</button>
+            </div>
+       </div>
+
+        </div>
+    </mdb-card>
+        <!-- Card -->
+    </div>
+  </div>
+
+
+</div>
+
+
+

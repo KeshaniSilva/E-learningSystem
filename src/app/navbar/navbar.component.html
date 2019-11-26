@@ -1,0 +1,378 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light  blue-grey lighten-5 fixed-top" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active" style="font-weight: bold;">E-Tuter</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+         Catergories<span class="caret"></span></a>
+         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu"  >
+          <div *ngFor="let course of loadedCourses">
+            <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/displaycourses', course.name]" (click)="onSelect(course.name)">{{course.name}}</a>
+
+          </div>
+
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+
+    <!-- Search form -->
+      <div >
+
+        <form class="example-form" style='max-height: 50px;' >
+            <mat-form-field class="example-full-width">
+              <input type="text" placeholder="Search" aria-label="Assignee" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" style="margin-top: 5px;" >
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="onSearch(option)">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+
+      </div>
+
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <!-- <button *ngIf="!userLoggedIn" mdbBtn type="button" color="success" outline="true" class="waves-light" data-toggle="modal" data-target="#signinModalForm" (click)="login.show()" mdbWavesEffect> Sign In</button> -->
+        <button *ngIf="!userLoggedIn" mdbBtn type="button" color="success" outline="true" class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="frame.show()" mdbWavesEffect> Sign In</button>
+        <button *ngIf="!userLoggedIn" mdbBtn type="button" color="success"  outline="true"  class="waves-light" data-toggle="modal" data-target="#signupModalForm" (click)="register.show()" mdbWavesEffect>Sign Up</button>
+    </div>
+
+      <div class="btn-group" *ngIf="userLoggedIn">
+
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+
+                <li class="nav-item avatar dropdown" dropdown>
+                  <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                    <img [src]="user.imageURL" alt="avatar inage" class="img-fluid rounded-circle z-depth-0" style="height: 40px; width: 40px;"></a>
+                  <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()" routerLink="/home">Logout</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/user.role">Profile</a>
+                  </div>
+                </li>
+              </ul>
+
+        </div>
+
+
+
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+
+<!-- -------------------------------------------------login modal ------------------------------------------->
+
+
+<div mdbModal  #login="mdbModal" class="modal fade top" id="frameModalTop1" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--Content-->
+    <div class="modal-content form-elegant">
+      <!--Header-->
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+          <strong>Sign in</strong>
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="login.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body mx-4">
+        <!--Body-->
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+          <div class="md-form mb-5">
+            <input type="email" id="Form-email1" class="form-control" mdbInput mdbValidate
+                   formControlName="email">
+            <label for="Form-email1">Email</label>
+            <mdb-error
+              *ngIf="emailValidate.invalid && (emailValidate.dirty || emailValidate.touched)">
+              Input invalid
+            </mdb-error>
+            <mdb-success
+              *ngIf="emailValidate.valid && (emailValidate.dirty || emailValidate.touched)">Input
+              valid
+            </mdb-success>
+          </div>
+
+          <div class="md-form pb-3">
+            <input type="password" id="Form-pass1" class="form-control" mdbInput mdbValidate
+                   formControlName="password">
+            <label for="Form-pass1">Password</label>
+            <mdb-error
+              *ngIf="passwordValidate.invalid && (passwordValidate.dirty || passwordValidate.touched)">
+              Input invalid
+            </mdb-error>
+            <mdb-success
+              *ngIf="passwordValidate.valid && (passwordValidate.dirty || passwordValidate.touched)">
+              Input valid
+            </mdb-success>
+            <p class="font-small blue-text d-flex justify-content-end">Forgot
+              <a  (click)="forgetPassword.show(); login.hide()" class="blue-text ml-1"> Password?</a>
+            </p>
+          </div>
+          <p class="text-center" style="color: red;">{{msg}}</p>
+
+          <div class="text-center mb-3">
+            <button type="submit" mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light"
+                    mdbWavesEffect>Sign in
+            </button>
+          </div>
+        </form>
+
+      </div>
+      <!--Footer-->
+      <div class="modal-footer mx-5 pt-3 mb-1">
+        <p class="font-small grey-text d-flex justify-content-end">Not a member?
+          <a href="#" class="blue-text ml-1"> Sign Up</a>
+        </p>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!-- ------------------------------------------------- End login modal ------------------------------------------->
+<!-- -------------------------------------------------Select role model------------------------------------------- -->
+
+<!-- <button type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample"
+        (click)="frame.show()" mdbWavesEffect>Launch Modal
+</button> -->
+
+<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar " role="document">
+    <!--Content-->
+
+    <div class="modal-content" style="background-color: transparent; border:none;">
+
+      <!--Header-->
+      <div class="row">
+        <div class="student" style="background-color: white;margin-right: 30px;">
+            <div class="modal-header">
+                <img src="https://images.unsplash.com/photo-1452830978618-d6feae7d0ffa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar"
+                     class="rounded-circle img-responsive">
+              </div>
+              <!--Body-->
+              <div class="modal-body mb-1">
+
+                <h5 class="mt-1 mb-2 text-center">Student</h5>
+
+
+                <div class="text-center mt-4">
+                  <button mdbBtn color="cyan" rounded="true" class="mt-1 waves-light"  data-target="#signinModalForm" (click)="login.show(); frame.hide();onSetRoleStuent()" mdbWavesEffect>Login
+                    <mdb-icon fas icon="sign-in-alt" class="ml-1"></mdb-icon>
+                  </button>
+                </div>
+              </div>
+        </div>
+
+        <div class="conterntProvider" style="background-color: white;">
+            <div class="modal-header">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" alt="avatar"
+                     class="rounded-circle img-responsive">
+              </div>
+              <!--Body-->
+              <div class="modal-body mb-1">
+
+                <h5 class="mt-1 mb-2 text-center">Content Provider</h5>
+
+
+                <div class="text-center mt-4">
+                  <button mdbBtn color="cyan" rounded="true" class="mt-1 waves-light"  data-target="#signinModalForm" (click)="login.show();frame.hide();onSetRoleContentprovider()" mdbWavesEffect>Login
+                    <mdb-icon fas icon="sign-in-alt" class="ml-1"></mdb-icon>
+                  </button>
+                </div>
+              </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!-- -------------------------------------------------End Select role model------------------------------------------- -->
+
+<!-- -------------------------------------------------register modal ------------------------------------------->
+<div mdbModal #register="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--Content-->
+    <div class="modal-content form-elegant">
+      <!--Header-->
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+          <strong>Sign Up</strong>
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="register.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body mx-4">
+        <!--Body-->
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          <div class="row" style="margin-top: -20px;">
+            <div class="col-sm">
+              <div class="md-form mb-5">
+                    <input type="text" id="Form-text1" class="form-control" mdbInput mdbValidate
+                           formControlName="fname">
+                    <label for="Form-text1">First Name</label>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="md-form mb-5">
+                    <input type="text" id="Form-text2" class="form-control" mdbInput mdbValidate
+                           formControlName="lname">
+                    <label for="Form-text2">Last Name</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="md-form mb-5" style="margin-top: -20px;">
+            <input type="email" id="Form-email2" class="form-control" mdbInput mdbValidate
+                   formControlName="email">
+            <label for="Form-email2">Email</label>
+            <mdb-error
+              *ngIf="emailValidateReg.invalid && (emailValidateReg.dirty || emailValidateReg.touched)">
+              Input invalid
+            </mdb-error>
+            <mdb-success
+              *ngIf="emailValidateReg.valid && (emailValidateReg.dirty || emailValidateReg.touched)">Input
+              valid
+            </mdb-success>
+          </div>
+          <div class="md-form pb-3" style="margin-top: -20px;">
+            <input type="password" id="Form-pass2" class="form-control" mdbInput mdbValidate
+                   formControlName="password">
+            <label for="Form-pass2">Password</label>
+            <mdb-error
+              *ngIf="passwordValidateReg.invalid && (passwordValidateReg.dirty || passwordValidateReg.touched)">
+              Input invalid
+            </mdb-error>
+            <mdb-success
+              *ngIf="passwordValidateReg.valid && (passwordValidateReg.dirty || passwordValidateReg.touched)">
+              Input valid
+            </mdb-success>
+          </div>
+
+
+
+
+
+          <div class="md-form pb-3" style="margin-top: -20px;">
+
+                  <!-- Default unchecked -->
+                  <div class="row">
+                    <div class="col-3"><p style="color: rgb(133, 133, 133);">Role</p></div>
+                    <div class="col-4">
+
+                      <div class="custom-control custom-radio" style="margin-top: 8px;">
+                        <input type="radio" class="custom-control-input" id="defaultChecked" name="role" value="student" formControlName="role"  checked mdbInput>
+                        <label class="custom-control-label" for="defaultChecked" style="font-size: 14pt; font-weight: bold;">Student</label>
+                      </div>
+                    </div>
+
+                  <div class="col-5" >
+
+                    <!-- Default checked -->
+                    <div class="custom-control custom-radio"  style="margin-top: 8px; ">
+                      <input type="radio" class="custom-control-input" id="defaultUnchecked" name="role" value="contentProvider" formControlName="role" mdbInput>
+                      <label class="custom-control-label" for="defaultUnchecked" style="font-size: 14pt; font-weight: bold;">Content Provider</label>
+                    </div>
+
+                  </div>
+                  </div>
+
+          </div>
+
+          <div class="text-center mb-3">
+            <button type="submit" mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light"
+                    mdbWavesEffect>Sign Up
+            </button>
+          </div>
+        </form>
+
+      </div>
+      <!--Footer-->
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!-- --------------------------------------------Forget password----------------------------------------------- -->
+
+
+<div mdbModal #forgetPassword="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--Content-->
+    <div class="modal-content form-elegant">
+      <!--Header-->
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+          <strong>Sign in</strong>
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="forgetPassword.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body mx-4">
+        <!--Body-->
+        <form [formGroup]="forgetPasswordForm" (ngSubmit)="onForgetPassword()">
+
+          <div class="md-form mb-5">
+            <input type="email" id="Form-email1" class="form-control" mdbInput mdbValidate formControlName="email"  >
+            <label for="Form-email1">Email</label>
+
+          </div>
+
+
+
+
+          <div class="text-center mb-3">
+            <button type="submit" mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light"
+                    mdbWavesEffect>Send
+            </button>
+          </div>
+        </form>
+
+      </div>
+      <!--Footer-->
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!-- --------------------------------------------Forget password----------------------------------------------- -->
+
+
+
+
+<!-- --------------------------------------------Footer----------------------------------------------------------------- -->
+
